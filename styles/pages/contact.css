@@ -1,0 +1,6 @@
+/* Same stylesheets, same order as the V20 contact.html. */
+@import "../legal.css";
+@import "../contact-v11.css";
+@import "../contact-polish.css";
+@import "../footer-v17.css";
+@import "../menu-v20.css";

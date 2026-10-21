@@ -1,0 +1,4 @@
+/* Same stylesheets, same order as the V20 index.html. */
+@import "../styles.css";
+@import "../footer-v17.css";
+@import "../menu-v20.css";

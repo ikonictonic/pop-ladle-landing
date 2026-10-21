@@ -1,0 +1,6 @@
+/* Same stylesheets, same order as the V20 privacy.html, minus contact-polish.css:
+   every rule in it targets contact-page elements, and sharing it with /contact let
+   the bundler load it before contact-v11.css there. */
+@import "../legal.css";
+@import "../footer-v17.css";
+@import "../menu-v20.css";
