@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
       { source: "/api/early-access", destination: `${apiUrl}/api/v1/early-access` },
       { source: "/api/subscriber/:path*", destination: `${apiUrl}/api/v1/subscriber/:path*` },
       { source: "/api/contact", destination: `${apiUrl}/api/v1/contact` },
+      // The access gate's cookie is scoped to /api/v1, so this path stays whole.
+      { source: "/api/v1/access-gate/:path*", destination: `${apiUrl}/api/v1/access-gate/:path*` },
     ];
   },
   // Old static-site URLs keep working.

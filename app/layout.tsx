@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { AccessGate } from "@/components/AccessGate";
 
 // Each page imports its own stylesheets (the V20/V22 CSS files share class names),
 // and internal links are plain <a> tags so every navigation is a full page load
@@ -16,7 +17,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AccessGate>{children}</AccessGate>
+      </body>
     </html>
   );
 }
