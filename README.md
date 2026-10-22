@@ -1,4 +1,5 @@
-# Pop & Ladle landing site (popladle.com)
+Change Made by Lee 10/22/2026 at 3:45PM PDT
+# Pop & Ladle landing site (popladle.com) 
 
 Next.js 16 port of the approved V20 landing site and V22 thank-you page. The
 pages render pixel-identical to the static originals (checked with full-page
