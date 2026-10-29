@@ -82,7 +82,6 @@ export default function HomePage() {
           <div className="wrap">
             <div className="section-heading">
               <div><h2>Help for the everyday kitchen.</h2></div>
-              <p>From the first glass of water and a balanced breakfast to the last meal of the day, Pop &amp; Ladle is built around the food and routines people manage at home.</p>
             </div>
             <div className="feature-grid">
               <article className="feature-card">
@@ -123,7 +122,6 @@ export default function HomePage() {
         <section aria-labelledby="food-title" className="food-section wrap">
           <div className="food-head">
             <h2 id="food-title">Good food, simple ideas, and everyday support made for real life.</h2>
-            <p>A look at the meals and drinks that inspire Pop &amp; Ladle.</p>
           </div>
           <div className="food-gallery">
             <figure className="gallery-large"><img alt="Roasted salmon with potatoes and greens" loading="eager" src="/assets/salmon.jpg" /></figure>
