@@ -4,3 +4,4 @@
 @import "../menu-v20.css";
 /* After the V20 files so its section spacing wins. */
 @import "../home-spacing.css";
+@import "../home-consent.css";

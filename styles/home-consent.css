@@ -1,0 +1,8 @@
+/* Cookie banner and preferences dialog buttons on the home page. The V20
+   styles.css has no .primary/.secondary rules, so .button's white text landed
+   on the white fill from .cookie-actions button. Same look as legal.css gives
+   them on /contact and /privacy. */
+.cookie-actions .button.secondary,.dialog-actions .button.secondary{background:#fff;border:1px solid var(--ink);color:var(--ink)}
+.cookie-actions .button.secondary:hover,.dialog-actions .button.secondary:hover{background:#FCF7F0;color:var(--ink)}
+.cookie-actions .button.primary,.dialog-actions .button.primary{background:var(--tomato);border:1px solid var(--tomato);color:#fff}
+.cookie-actions .button.primary:hover,.dialog-actions .button.primary:hover{background:#C9543C;border-color:#C9543C;color:#fff}
