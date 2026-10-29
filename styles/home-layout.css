@@ -1,0 +1,16 @@
+/* Home page layout over V20.
+   Even vertical rhythm: the V20 sections each carried their own padding, so
+   the gaps between them ran 70-133px on desktop and 38-69px on phones. Every
+   gap is now --home-gap (about 56px on phones, 103px at 1440), including the
+   hero band above and the footer band below. */
+:root{--home-gap:clamp(56px,calc(38px + 4.5vw),104px);--home-heading-gap:clamp(22px,calc(14px + 1.4vw),36px)}
+.statement,.feature-section,.story,.food-section,.faq{padding-block:calc(var(--home-gap) / 2)}
+.statement{padding-top:var(--home-gap)}
+.faq{padding-bottom:var(--home-gap)}
+.section-heading,.food-head,.faq-title{margin-bottom:var(--home-heading-gap)}
+/* Trailing margins would add to the gap below their section. */
+.statement-copy p:last-child,.faq-item:last-child{margin-bottom:0}
+/* Desktop: the food gallery heading centered on one line across the container.
+   Sized to the container (about 96% of its width) so it never wraps with
+   "life." alone; balance covers a font that renders wider. 52px is the h2 cap. */
+@media(min-width:1101px){.food-head{display:block;container-type:inline-size;text-align:center}.food-head h2{max-width:none;font-size:min(3.55cqi,52px);text-wrap:balance}}

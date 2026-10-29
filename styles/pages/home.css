@@ -2,6 +2,6 @@
 @import "../styles.css";
 @import "../footer-v17.css";
 @import "../menu-v20.css";
-/* After the V20 files so its section spacing wins. */
-@import "../home-spacing.css";
+/* After the V20 files so these home-only rules win. */
+@import "../home-layout.css";
 @import "../home-consent.css";
