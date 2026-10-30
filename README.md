@@ -15,6 +15,7 @@ or email code of its own.
 | `/contact` | Contact form |
 | `/privacy` | Draft Privacy Notice (counsel review pending) |
 | `/thank-you` | After signup: asks the visitor to confirm by email |
+| `/guide-link-expired` | Where a dead guide link from the welcome email lands |
 | `/confirm-email` | Link in the confirmation email; confirms through the backend |
 | `/preferences` | Link in marketing email: change interest or unsubscribe |
 
@@ -48,10 +49,11 @@ exactly as approved:
 2. The backend stores a pending signup and emails a confirmation link, and the
    browser goes to `/thank-you`.
 3. `/confirm-email?token=…` confirms. The backend then subscribes the Plunk
-   contact and sends the planner email once.
-4. The interest question lives on `/preferences`, linked from that email, and
-   saves through `/api/subscriber/preference`. Choosing meal planning starts
-   the meal-planning workflow.
+   contact and sends the welcome email once, with a personal 48-hour link to
+   the guide (`/api/subscriber/guide?token=…`).
+4. The interest question lives on `/preferences` and saves through
+   `/api/subscriber/preference`. Choosing meal planning starts the
+   meal-planning workflow.
 
 `/api/early-access`, `/api/subscriber/*` and `/api/contact` are rewritten to
 `${API_URL}/api/v1/...` (see `next.config.ts`), so the browser only talks to

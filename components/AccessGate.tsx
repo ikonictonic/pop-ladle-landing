@@ -17,7 +17,7 @@ const ENABLED = process.env.NEXT_PUBLIC_ACCESS_GATE_ENABLED === "true";
 const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || "/api/v1").replace(/\/+$/, "");
 
 // Opened from email, by people who never had the password. Unsubscribe has to work.
-const OPEN_PATHS = ["/confirm-email", "/preferences"];
+const OPEN_PATHS = ["/confirm-email", "/preferences", "/guide-link-expired"];
 
 // Every internal link is a full page load, so this tab remembers it was let in
 // and shows the page while the backend re-checks, instead of a blank screen.

@@ -28,8 +28,7 @@ async function ConfirmResult({ searchParams }: Pick<PageProps<"/confirm-email">,
     return (
       <>
         <h1>You&apos;re confirmed.<br /><em>Welcome to the table.</em></h1>
-        <p className="intro">Your Everyday Kitchen Planner is on its way to your inbox. You can also download it now.</p>
-        <a className="download" href="/Everyday-Kitchen-Planner.pdf" download>DOWNLOAD YOUR FREE PLANNER</a>
+        <p className="intro">Your personal welcome and your copy of <em>Everyday Caring in the Kitchen</em> are on their way to your inbox.</p>
       </>
     );
   }
