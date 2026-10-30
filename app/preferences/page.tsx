@@ -16,7 +16,7 @@ export default function PreferencesPage() {
     <WelcomeShell eyebrow="EMAIL PREFERENCES">
       <h1>Your email,<br /><em>your call.</em></h1>
       <p className="intro">Tell us what would help most in your kitchen, or stop hearing from us.</p>
-      <PreferenceQuestion mode="preferences" />
+      <PreferenceQuestion />
       <UnsubscribePanel />
     </WelcomeShell>
   );

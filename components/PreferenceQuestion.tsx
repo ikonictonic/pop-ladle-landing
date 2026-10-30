@@ -5,17 +5,11 @@ import { interests, type InterestCode } from "@/lib/site";
 
 const NOT_CONNECTED = "Your selection is ready. Saving will be available when the subscriber service is connected.";
 
-type Props = {
-  // "thank-you": collapsed, optional, authorised by ?session= from signup.
-  // "preferences": open, authorised by the signed ?token= from an email link.
-  mode: "thank-you" | "preferences";
-};
-
-// The optional "What would make your kitchen a little easier?" module.
+// The optional "What would make your kitchen a little easier?" module on the
+// email preferences page, authorised by the signed ?token= from the email link.
 // It asks about kitchen help only, never medical information.
-export function PreferenceQuestion({ mode }: Props) {
-  const thankYou = mode === "thank-you";
-  const [open, setOpen] = useState(!thankYou);
+export function PreferenceQuestion() {
+  const [open, setOpen] = useState(true);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -24,13 +18,12 @@ export function PreferenceQuestion({ mode }: Props) {
     e.preventDefault();
     const choice = new FormData(e.currentTarget).get("primary_interest") as InterestCode | null;
     if (!choice) {
-      setStatus(thankYou ? "Choose one answer, or select Not now." : "Choose one answer.");
+      setStatus("Choose one answer.");
       return;
     }
 
-    const params = new URLSearchParams(location.search);
-    const auth = thankYou ? { signup_session: params.get("session") } : { manage_token: params.get("token") };
-    if (!Object.values(auth)[0]) {
+    const token = new URLSearchParams(location.search).get("token");
+    if (!token) {
       setStatus(NOT_CONNECTED);
       return;
     }
@@ -41,7 +34,7 @@ export function PreferenceQuestion({ mode }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "same-origin",
-        body: JSON.stringify({ primary_interest: choice, ...auth }),
+        body: JSON.stringify({ primary_interest: choice, manage_token: token }),
       });
       if (res.status === 503 || res.status === 404) {
         setStatus(NOT_CONNECTED);
@@ -68,7 +61,7 @@ export function PreferenceQuestion({ mode }: Props) {
         onClick={() => setOpen(!open)}
       >
         <span>
-          <small>{thankYou ? "IF YOU HAVE A MOMENT" : "YOUR INTERESTS"}</small>
+          <small>YOUR INTERESTS</small>
           <strong id="question-heading">What would make your kitchen a little easier?</strong>
         </span>
         <svg width="23" height="23" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -89,11 +82,6 @@ export function PreferenceQuestion({ mode }: Props) {
           </fieldset>
           <div className="question-actions">
             <button type="submit" className="save" disabled={busy}>SAVE MY PREFERENCE</button>
-            {thankYou && (
-              <button type="button" className="skip" id="skip-preference" onClick={() => setOpen(false)}>
-                NOT NOW
-              </button>
-            )}
           </div>
           <p className="pref-status" id="preference-status" role="status" aria-live="polite">
             {status}

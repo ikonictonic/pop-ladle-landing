@@ -1,7 +1,7 @@
 Change Made by Lee 10/22/2026 at 3:45PM PDT
 # Pop & Ladle landing site (popladle.com) 
 
-Next.js 16 port of the approved V20 landing site and V22 thank-you page. The
+Next.js 16 port of the approved V20 landing site and V25 thank-you page. The
 pages render pixel-identical to the static originals (checked with full-page
 screenshot diffs at 375, 768, 1280 and 1920 px). The backend is
 [pop-ladle](https://github.com/ikonictonic/pop-ladle); this app has no database
@@ -14,7 +14,7 @@ or email code of its own.
 | `/` | Landing page, FAQ, early-access signup in the footer |
 | `/contact` | Contact form |
 | `/privacy` | Draft Privacy Notice (counsel review pending) |
-| `/thank-you` | After signup: planner PDF and the optional interest question |
+| `/thank-you` | After signup: asks the visitor to confirm by email |
 | `/confirm-email` | Link in the confirmation email; confirms through the backend |
 | `/preferences` | Link in marketing email: change interest or unsubscribe |
 
@@ -23,13 +23,15 @@ the new routes.
 
 ## How the styling works
 
-The V20/V22 stylesheets are copied unchanged into `styles/` (only `url()` paths
+The V20, V22 and V25 stylesheets are copied unchanged into `styles/` (only `url()` paths
 became root-absolute) and they reuse class names across pages. To keep each page
 exactly as approved:
 
 - Each page imports one entry file from `styles/pages/` that lists its
-  stylesheets in the original `<link>` order. The thank-you frame imports
-  `thank-you-v22.css` through `components/WelcomeShell.tsx`.
+  stylesheets in the original `<link>` order. `/thank-you` imports
+  `thank-you-v23.css` (the V25 package's stylesheet). `/confirm-email`,
+  `/preferences` and the 404 page get `thank-you-v22.css` through
+  `components/WelcomeShell.tsx`.
 - Internal links are plain `<a>` tags, not `next/link`. Every navigation is a
   full page load, so one page's CSS never carries over to the next. The ESLint
   rule that would flag this is turned off in `eslint.config.mjs` for that reason.
@@ -44,11 +46,12 @@ exactly as approved:
    version on the backend too (`CONSENT_TEXTS` in
    `pop-ladle/src/features/subscribers/subscriberService.js`).
 2. The backend stores a pending signup and emails a confirmation link, and the
-   browser goes to `/thank-you?session=…` (an opaque token, never the email).
-3. The interest question saves through `/api/subscriber/preference`.
-4. `/confirm-email?token=…` confirms. The backend then creates the Resend
-   contact, sends the planner email once, and starts the meal-planning
-   automation if that was the chosen interest.
+   browser goes to `/thank-you`.
+3. `/confirm-email?token=…` confirms. The backend then subscribes the Plunk
+   contact and sends the planner email once.
+4. The interest question lives on `/preferences`, linked from that email, and
+   saves through `/api/subscriber/preference`. Choosing meal planning starts
+   the meal-planning workflow.
 
 `/api/early-access`, `/api/subscriber/*` and `/api/contact` are rewritten to
 `${API_URL}/api/v1/...` (see `next.config.ts`), so the browser only talks to

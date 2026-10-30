@@ -7,8 +7,8 @@ import { ArrowSvg } from "./ArrowIcon";
 const NOT_CONNECTED = "The signup service is being connected. Please check back soon.";
 const FAILED = "Your request could not be sent right now. Please try again shortly.";
 
-// Footer early-access form. Success goes to the thank-you page with the opaque
-// signup session (never the email address) in the URL.
+// Footer early-access form. Success goes to the thank-you page, which asks the
+// visitor to confirm by email.
 export function SignupForm() {
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
@@ -39,10 +39,8 @@ export function SignupForm() {
         return;
       }
       if (!res.ok) throw new Error("request");
-      const result = await res.json().catch(() => ({}));
-      const url = new URL("/thank-you", location.href);
-      if (result.signup_session) url.searchParams.set("session", result.signup_session);
-      location.assign(url.href);
+      // A full page load, not router.push: the home stylesheets must not follow.
+      location.assign(new URL("/thank-you", location.href).href);
     } catch {
       setStatus(FAILED);
     } finally {

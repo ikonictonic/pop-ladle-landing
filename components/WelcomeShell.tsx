@@ -2,8 +2,8 @@ import "@/styles/thank-you-v22.css";
 
 import { Year } from "./Year";
 
-// The V22 thank-you page frame, shared by thank-you, email confirmation,
-// email preferences and 404. No site navigation or signup form by design.
+// The V22 welcome frame, shared by email confirmation, email preferences and
+// 404. No site navigation or signup form by design.
 export function WelcomeShell({ eyebrow, children }: { eyebrow: string; children: React.ReactNode }) {
   return (
     <>
